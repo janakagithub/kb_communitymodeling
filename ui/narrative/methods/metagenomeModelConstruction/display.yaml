@@ -1,9 +1,9 @@
 #
 # define display information
 #
-name: Metgenome Metabolic Model
+name: Build Metagenome Metabolic Model
 tooltip: |
-      Metageome Metabolic Model
+      Build Metagenome Metabolic Model
 screenshots: []
 
 icon: fungalmodel-teal.png
