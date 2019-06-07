@@ -250,15 +250,12 @@ sub meta_genome_model_construction
     #my $fba_object = $wshandle->get_objects([{workspace=>$template_ws,name=>$templateId->{$k}->[0]}] )->[0]{data};
     #my $fba_object = $wshandle->get_objects2([{ref=>$params->{input_fba}}])->[0]{data};
 
-    my $genome_object = $wshandle->get_objects2( {objects=>[{ref=>$params->{input_genome}}]})->{data}[0]{data};
+    #my $genome_object = $wshandle->get_objects2( {objects=>[{ref=>$params->{input_genome}}]})->{data}[0]{data};
 
     # print &Dumper ($genome_object);
     #Annoate with RAST
         #The API call is here, but I could not work test locally as it cannot copy the kmer ref data file through sdk call back.
-    my $output_genome_rast =  $params->{input_genome}."RAST";
-
-    print "$output_genome_rast\n";
-      die;
+    my $output_genome_rast =  $params->{input_genome}.".RAST";
 
     my $rastAnno = $ra->reannotate_microbial_genome({
 
