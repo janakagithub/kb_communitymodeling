@@ -255,13 +255,16 @@ sub meta_genome_model_construction
     # print &Dumper ($genome_object);
     #Annoate with RAST
         #The API call is here, but I could not work test locally as it cannot copy the kmer ref data file through sdk call back.
-
     my $output_genome_rast =  $params->{input_genome}."RAST";
+
+    print "$output_genome_rast\n";
+      die;
+
     my $rastAnno = $ra->reannotate_microbial_genome({
 
         input_genome => $params->{input_genome},
         output_genome => $output_genome_rast,
-        workspace => $params->{workspace},
+        workspace_name => $params->{workspace},
         call_features_rRNA_SEED => 0,
         call_features_tRNA_trnascan => 0,
         call_selenoproteins => 0,
