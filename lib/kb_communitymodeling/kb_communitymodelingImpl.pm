@@ -228,8 +228,8 @@ sub meta_genome_model_construction
     my $wshandle= Workspace::WorkspaceClient->new($self->{'workspace-url'},token=>$token);
 
     my $ra = new installed_clients::RAST_SDKClient( $self->{'callbackURL'},
-                                                            ( 'service_version' => 'release',
-                                                              'async_version' => 'release',
+                                                            ( 'service_version' => 'dev',
+                                                              'async_version' => 'dev',
                                                             )
                                                  );
     my $fm = new installed_clients::fba_toolsClient( $self->{'callbackURL'},
@@ -250,16 +250,17 @@ sub meta_genome_model_construction
     #my $fba_object = $wshandle->get_objects([{workspace=>$template_ws,name=>$templateId->{$k}->[0]}] )->[0]{data};
     #my $fba_object = $wshandle->get_objects2([{ref=>$params->{input_fba}}])->[0]{data};
 
-    #my $genome_object = $wshandle->get_objects2( {objects=>[{ref=>$params->{input_genome}}]})->{data}[0]{data};
+    my $genome_object = $wshandle->get_objects2( {objects=>[{ref=>$params->{genome_ref}}]})->{data}[0];
 
-    # print &Dumper ($genome_object);
+    #print &Dumper ($genome_object);
+    #die;
     #Annoate with RAST
         #The API call is here, but I could not work test locally as it cannot copy the kmer ref data file through sdk call back.
     my $output_genome_rast =  $params->{genome_ref}.".RAST";
 
     my $rastAnno = $ra->annotate_genome({
 
-        input_genome => '24141/5/1', #$params->{gneome_ref},
+        input_genome => $gneome_object->{info}->[6]."/".$gneome_object->{info}->[0]."/".$gneome_object->{info}->[4],
         output_genome => $output_genome_rast,
         workspace_name => $params->{workspace},
         workspace => $params->{workspace},
