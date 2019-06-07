@@ -259,7 +259,7 @@ sub meta_genome_model_construction
 
     my $rastAnno = $ra->annotate_genome({
 
-        input_genome => params->{gneome_ref},
+        input_genome => $params->{gneome_ref},
         output_genome => $output_genome_rast,
         workspace_name => $params->{workspace},
         workspace => $params->{workspace},
