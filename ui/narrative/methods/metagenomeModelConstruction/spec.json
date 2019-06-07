@@ -95,6 +95,10 @@
                   "target_property": "type"
                 },
                 {
+                  "narrative_system_variable": "workspace",
+                  "target_property": "workspace_name"
+                },
+                {
                   "input_parameter": "output_model",
                   "target_property": "obj"
                 },

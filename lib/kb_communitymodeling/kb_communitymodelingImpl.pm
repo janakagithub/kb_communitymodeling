@@ -245,8 +245,8 @@ sub meta_genome_model_construction
 
 
     print("Starting metagenome model construction ;Parameters:\n");
-    print(Dumper($params->{input_genome}) . "\n");
-
+    print &Dumper($params);
+    die;
     #my $fba_object = $wshandle->get_objects([{workspace=>$template_ws,name=>$templateId->{$k}->[0]}] )->[0]{data};
     #my $fba_object = $wshandle->get_objects2([{ref=>$params->{input_fba}}])->[0]{data};
 
@@ -262,6 +262,7 @@ sub meta_genome_model_construction
         input_genome => $params->{input_genome},
         output_genome => $output_genome_rast,
         workspace_name => $params->{workspace},
+        workspace => $params->{workspace},
         call_features_rRNA_SEED => 0,
         call_features_tRNA_trnascan => 0,
         call_selenoproteins => 0,
@@ -282,6 +283,7 @@ sub meta_genome_model_construction
     });
 
     my $output_fba_model = $output_genome_rast."Model";
+
     my $new_model = $fm->build_metabolic_model({
 
         genome_id => $output_genome_rast,
