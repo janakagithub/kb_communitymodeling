@@ -246,7 +246,7 @@ sub meta_genome_model_construction
 
     print("Starting metagenome model construction ;Parameters:\n");
     print &Dumper($params);
-    die;
+
     #my $fba_object = $wshandle->get_objects([{workspace=>$template_ws,name=>$templateId->{$k}->[0]}] )->[0]{data};
     #my $fba_object = $wshandle->get_objects2([{ref=>$params->{input_fba}}])->[0]{data};
 
