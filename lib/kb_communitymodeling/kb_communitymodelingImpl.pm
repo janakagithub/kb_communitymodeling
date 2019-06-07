@@ -289,7 +289,7 @@ sub meta_genome_model_construction
 
         genome_id => $output_genome_rast,
         media_id =>  $params->{media_id},
-        fbamodel_output_id =>$output_fba_model,
+        fbamodel_output_id =>$params->{output_model},
         workspace => $params->{workspace},
         template_id => "auto",
         gapfill_model => $params->{gapfill_model},
