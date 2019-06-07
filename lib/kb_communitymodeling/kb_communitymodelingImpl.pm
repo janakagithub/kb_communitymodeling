@@ -259,7 +259,7 @@ sub meta_genome_model_construction
 
     my $rastAnno = $ra->annotate_genome({
 
-        input_genome => $params->{input_genome},
+        input_genome => $params->{gneome_ref},
         output_genome => $output_genome_rast,
         workspace_name => $params->{workspace},
         workspace => $params->{workspace},
@@ -287,10 +287,11 @@ sub meta_genome_model_construction
     my $new_model = $fm->build_metabolic_model({
 
         genome_id => $output_genome_rast,
-        media_id =>  "",
+        media_id =>  $params->{media_id},
         fbamodel_output_id =>$output_fba_model,
+        workspace => $params->{workspace},
         template_id => "auto",
-        gapfill_model => 1,
+        gapfill_model => $params->{gapfill_model},
         classic_mode => 0,
         use_annotated_functions => 1,
         merge_all_annotations => 0,

@@ -44,7 +44,7 @@ my $testInput= {
 
 my $testGenomeModel= {
         workspace => $genome_ws,
-        input_genome =>  $genome_name
+        input_genome =>  $genome_ref
 };
 
 eval {
