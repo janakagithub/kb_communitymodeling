@@ -260,7 +260,7 @@ sub meta_genome_model_construction
 
     my $rastAnno = $ra->annotate_genome({
 
-        input_genome => $geneome_object->{info}->[6]."/".$geneome_object->{info}->[0]."/".$geneome_object->{info}->[4],
+        input_genome => $genome_object->{info}->[6]."/".$genome_object->{info}->[0]."/".$genome_object->{info}->[4],
         output_genome => $output_genome_rast,
         workspace_name => $params->{workspace},
         workspace => $params->{workspace},
