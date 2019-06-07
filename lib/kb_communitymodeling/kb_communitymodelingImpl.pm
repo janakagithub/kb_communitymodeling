@@ -22,7 +22,7 @@ This module predict trophic interactions.
 use Bio::KBase::AuthToken;
 use KBaseReport::KBaseReportClient;
 use Workspace::WorkspaceClient;
-use fba_tools::fba_toolsClient;
+use installed_clients::fba_toolsClient;
 use installed_clients::RAST_SDKClient;
 use Config::IniFiles;
 use Bio::SeqIO;
@@ -259,7 +259,7 @@ sub meta_genome_model_construction
 
     my $rastAnno = $ra->annotate_genome({
 
-        input_genome => $params->{gneome_ref},
+        input_genome => '24141/5/1', #$params->{gneome_ref},
         output_genome => $output_genome_rast,
         workspace_name => $params->{workspace},
         workspace => $params->{workspace},

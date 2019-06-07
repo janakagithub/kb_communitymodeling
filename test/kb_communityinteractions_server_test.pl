@@ -34,7 +34,7 @@ sub get_ws_name {
 my $fbaobject_ws = '44405';
 my $fbaobject_name = '44405/2/6';
 
-my $genome_ref = 'SoilSFA_WA_nrKO.genome'; # appdev
+my $genome_ref = '24141/5/1'; # appdev
 my $genome_ws = 'bsadkhin:narrative_1548811307001';
 
 my $testInput= {
