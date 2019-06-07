@@ -21,6 +21,7 @@ This module predict trophic interactions.
 #BEGIN_HEADER
 use Bio::KBase::AuthToken;
 use KBaseReport::KBaseReportClient;
+use Workspace::WorkspaceClient;
 use fba_tools::fba_toolsClient;
 use installed_clients::RAST_SDKClient;
 use Config::IniFiles;

@@ -39,6 +39,17 @@
              }
         },
         {
+            "id" : "media_id",
+            "optional" : true,
+            "advanced" : true,
+            "allow_multiple" : false,
+            "default_values" : [ "" ],
+            "field_type" : "text",
+            "text_options" : {
+            "valid_ws_types" : [ "KBaseBiochem.Media" ]
+            }
+        },
+        {
             "id" : "output_model",
             "optional" : false,
             "advanced" : false,
@@ -49,20 +60,7 @@
             "valid_ws_types" : [ "KBaseFBA.FBAModel" ],
             "is_output_name":true
             }
-        },
-        {
-            "id" : "media_id",
-            "optional" : true,
-            "advanced" : true,
-            "allow_multiple" : false,
-            "default_values" : [ "" ],
-            "field_type" : "text",
-            "text_options" : {
-            "valid_ws_types" : [ "KBaseBiochem.Media" ]
-            }
         }
-
-
     ],
     "behavior": {
         "service-mapping": {
@@ -77,8 +75,6 @@
                 {
                     "input_parameter": "genome_ref",
                     "target_property": "genome_ref"
-
-
                 },
                 {
                     "input_parameter": "media_id",
