@@ -1,0 +1,267 @@
+package kb_communityinteractions::kb_communityinteractionsImpl;
+use strict;
+use Bio::KBase::Exceptions;
+# Use Semantic Versioning (2.0.0-rc.1)
+# http://semver.org
+our $VERSION = '0.0.1';
+our $GIT_URL = '';
+our $GIT_COMMIT_HASH = '';
+
+=head1 NAME
+
+kb_communityinteractions
+
+=head1 DESCRIPTION
+
+A KBase module: kb_communityinteractions
+This module predict trophic interactions.
+
+=cut
+
+#BEGIN_HEADER
+use Bio::KBase::AuthToken;
+use KBaseReport::KBaseReportClient;
+use Config::IniFiles;
+use Bio::SeqIO;
+use Data::Dumper;
+#END_HEADER
+
+sub new
+{
+    my($class, @args) = @_;
+    my $self = {
+    };
+    bless $self, $class;
+    #BEGIN_CONSTRUCTOR
+
+    my $config_file = $ENV{ KB_DEPLOYMENT_CONFIG };
+    my $cfg = Config::IniFiles->new(-file=>$config_file);
+    my $scratch = $cfg->val('kb_communityinteractions', 'scratch');
+    my $wsInstance = $cfg->val('kb_communityinteractions','workspace-url');
+    my $callbackURL = $ENV{ SDK_CALLBACK_URL };
+
+    $self->{scratch} = $scratch;
+    $self->{callbackURL} = $callbackURL;
+    $self->{'workspace-url'} = $wsInstance;
+
+    #END_CONSTRUCTOR
+
+    if ($self->can('_init_instance'))
+    {
+	$self->_init_instance();
+    }
+    return $self;
+}
+
+=head1 METHODS
+
+
+
+=head2 predict_trophic_interactions
+
+  $output = $obj->predict_trophic_interactions($params)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$params is a kb_communityinteractions.trophicInteractionInput
+$output is a kb_communityinteractions.trophicInteractionOutput
+trophicInteractionInput is a reference to a hash where the following keys are defined:
+	workspace has a value which is a string
+	model_ref has a value which is a string
+trophicInteractionOutput is a reference to a hash where the following keys are defined:
+	report_name has a value which is a string
+	report_ref has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$params is a kb_communityinteractions.trophicInteractionInput
+$output is a kb_communityinteractions.trophicInteractionOutput
+trophicInteractionInput is a reference to a hash where the following keys are defined:
+	workspace has a value which is a string
+	model_ref has a value which is a string
+trophicInteractionOutput is a reference to a hash where the following keys are defined:
+	report_name has a value which is a string
+	report_ref has a value which is a string
+
+
+=end text
+
+
+
+=item Description
+
+
+
+=back
+
+=cut
+
+sub predict_trophic_interactions
+{
+    my $self = shift;
+    my($params) = @_;
+
+    my @_bad_arguments;
+    (ref($params) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument \"params\" (value was \"$params\")");
+    if (@_bad_arguments) {
+	my $msg = "Invalid arguments passed to predict_trophic_interactions:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+							       method_name => 'predict_trophic_interactions');
+    }
+
+    my $ctx = $kb_communityinteractions::kb_communityinteractionsServer::CallContext;
+    my($output);
+    #BEGIN predict_trophic_interactions
+    my $token=$ctx->token;
+    my $provenance=$ctx->provenance;
+    my $wshandle= Workspace::WorkspaceClient->new($self->{'workspace-url'},token=>$token);
+    print("Starting communityinteractions. Parameters:\n");
+    print(Dumper($params->{input_fba}) . "\n");
+
+    #my $fba_object = $wshandle->get_objects([{workspace=>$template_ws,name=>$templateId->{$k}->[0]}] )->[0]{data};
+    #my $fba_object = $wshandle->get_objects2([{ref=>$params->{input_fba}}])->[0]{data};
+
+    my $fba_object = $wshandle->get_objects2( {objects=>[{ref=>$params->{input_fba}}]})->{data}[0]{data}{FBACompoundVariables};
+    for (my $i =0; $i< @{$fba_object}; $i++){
+        if ($fba_object->[$i]->{variableType} eq 'drainflux'){
+            print $fba_object->[$i]->{modelcompound_ref}."\n";
+        }
+    }
+
+    #print &Dumper ($fba_object);
+    die;
+
+
+    #END predict_trophic_interactions
+    my @_bad_returns;
+    (ref($output) eq 'HASH') or push(@_bad_returns, "Invalid type for return variable \"output\" (value was \"$output\")");
+    if (@_bad_returns) {
+	my $msg = "Invalid returns passed to predict_trophic_interactions:\n" . join("", map { "\t$_\n" } @_bad_returns);
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+							       method_name => 'predict_trophic_interactions');
+    }
+    return($output);
+}
+
+
+
+
+=head2 status
+
+  $return = $obj->status()
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$return is a string
+</pre>
+
+=end html
+
+=begin text
+
+$return is a string
+
+=end text
+
+=item Description
+
+Return the module status. This is a structure including Semantic Versioning number, state and git info.
+
+=back
+
+=cut
+
+sub status {
+    my($return);
+    #BEGIN_STATUS
+    $return = {"state" => "OK", "message" => "", "version" => $VERSION,
+               "git_url" => $GIT_URL, "git_commit_hash" => $GIT_COMMIT_HASH};
+    #END_STATUS
+    return($return);
+}
+
+=head1 TYPES
+
+
+
+=head2 trophicInteractionInput
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+workspace has a value which is a string
+model_ref has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+workspace has a value which is a string
+model_ref has a value which is a string
+
+
+=end text
+
+=back
+
+
+
+=head2 trophicInteractionOutput
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+report_name has a value which is a string
+report_ref has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+report_name has a value which is a string
+report_ref has a value which is a string
+
+
+=end text
+
+=back
+
+
+
+=cut
+
+1;

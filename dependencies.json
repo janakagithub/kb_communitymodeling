@@ -1,0 +1,9 @@
+[ {
+  "module_name" : "fba_tools",
+  "type" : "sdk",
+  "version_tag" : "beta"
+}, {
+  "module_name" : "RAST_SDK",
+  "type" : "sdk",
+  "version_tag" : "release"
+} ]

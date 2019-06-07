@@ -1,0 +1,121 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "janakakbase"
+    ],
+    "contact": "https://kbase.us/contact-us/",
+    "categories": ["active","metabolic_modeling"],
+    "widgets": {
+        "input": null,
+        "output": "kbaseTabTable"
+    },
+    "parameters": [
+        {
+            "id": "genome_ref",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ "KBaseGenomes.Genome" ]
+            }
+        },
+        {
+             "field_type" : "checkbox",
+             "allow_multiple" : false,
+             "optional" : false,
+             "id" : "gapfill_model",
+             "advanced" : false,
+             "default_values" : [
+                "0"
+             ],
+             "checkbox_options" : {
+                "unchecked_value" : 0,
+                "checked_value" : 1
+             },
+             "text_options" : {
+                "valid_ws_types" : []
+             }
+        },
+        {
+            "id" : "output_model",
+            "optional" : false,
+            "advanced" : false,
+            "allow_multiple" : false,
+            "default_values" : [ "" ],
+            "field_type" : "text",
+            "text_options" : {
+            "valid_ws_types" : [ "KBaseFBA.FBAModel" ],
+            "is_output_name":true
+            }
+        },
+        {
+            "id" : "media_id",
+            "optional" : true,
+            "advanced" : true,
+            "allow_multiple" : false,
+            "default_values" : [ "" ],
+            "field_type" : "text",
+            "text_options" : {
+            "valid_ws_types" : [ "KBaseBiochem.Media" ]
+            }
+        }
+
+
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name":"kb_communitymodeling",
+            "method": "meta_genome_model_construction",
+            "input_mapping": [
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "workspace"
+                },
+                {
+                    "input_parameter": "genome_ref",
+                    "target_property": "genome_ref"
+
+
+                },
+                {
+                    "input_parameter": "media_id",
+                    "target_property": "media_id"
+                },
+                {
+                    "input_parameter": "gapfill_model",
+                    "target_property": "gapfill_model"
+                },
+                {
+                    "input_parameter": "output_model",
+                    "target_property": "output_model"
+                }
+            ],
+            "output_mapping": [
+                {
+                  "constant_value": "KBaseFBA.FBAModel",
+                  "target_property": "type"
+                },
+                {
+                  "input_parameter": "output_model",
+                  "target_property": "obj"
+                },
+                {
+                    "service_method_output_path": [0,"report_name"],
+                    "target_property": "report_name"
+                },
+                {
+                    "service_method_output_path": [0,"report_ref"],
+                    "target_property": "report_ref"
+                },
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "ws"
+                }
+            ]
+        }
+    },
+    "job_id_output_field": "docker"
+}
