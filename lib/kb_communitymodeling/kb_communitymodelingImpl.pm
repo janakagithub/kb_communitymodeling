@@ -256,7 +256,7 @@ sub meta_genome_model_construction
     #die;
     #Annoate with RAST
         #The API call is here, but I could not work test locally as it cannot copy the kmer ref data file through sdk call back.
-    my $output_genome_rast =  $params->{genome_ref}.".RAST";
+    my $output_genome_rast =  $genome_object->{info}->[1].".RAST";
 
     my $rastAnno = $ra->annotate_genome({
 
